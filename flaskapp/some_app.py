@@ -29,7 +29,6 @@ class MyForm(FlaskForm):
     
 SECRET_KEY = 'secret'
 app.config['SECRET_KEY'] = SECRET_KEY
-# используем капчу и полученные секретные ключи с сайта google 
 app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] = '6LenXSsbAAAAABPqpQZ3RpkDt42hxynW7j7SZxpm'
 app.config['RECAPTCHA_PRIVATE_KEY'] = '6LenXSsbAAAAALFvL7os3RcyzKnYADCcTW37GBPH'
@@ -39,16 +38,13 @@ bootstrap = Bootstrap(app)
     
 
 @app.route("/", methods=['GET', 'POST'])
-def secondFun():
+def main():
     form = MyForm()
     filename = None
-    filename_graph=None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
-#         filename_graph = os.path.join('./static', f'picture.png')
         form.upload.data.save(filename)
-#         twist_image(filename, form.user.data) # func
     return render_template('myTemplate.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
