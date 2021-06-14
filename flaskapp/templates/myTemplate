@@ -1,10 +1,10 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 <!-- задаем заголовок страницы -->
-{% block title %}TOPIC{% endblock %}
+{% block title %}This is an page{% endblock %}
 <!-- блок body -->
 {% block content %}
-{{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="myTemplate") }}
+{{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="iz") }}
 <!-- один из стандартных тэгов html - заголовок второго уровня -->
 <h2>Image is here: </h2>
 <!-- отображаем загруженное изображение с закругленными углами -->
@@ -12,7 +12,8 @@
 {% if image_name %}
  <p>{{image_name}}
  <p><img src={{image_name}} class="img-rounded" alt="My Image" width = 224 height=224 />
+ <p><img src={{filename_graph}} class="img-rounded" alt="My Image" width = 224 height=224 />
 {% else %}
- <p>NO IMAGE</p>
+ <p> There is no image yet </p>
 {% endif %}
 {% endblock %}
