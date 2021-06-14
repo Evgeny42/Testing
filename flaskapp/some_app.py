@@ -26,7 +26,7 @@ def hello():
   
 @app.route("/pic")
 def pic():
-    return " <html><head></head><body><img src="./static/picture.jpg"></body></html>"  
+    return " <html><head></head><body><img src="Testing/flaskapp/static/picture.jpg"></body></html>"  
   
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
