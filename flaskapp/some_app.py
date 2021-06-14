@@ -52,7 +52,10 @@ if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
 
 def show_image(filename):
-    return render_template("show_image.html", name=filename)
+    myImage = Image.open(filename)
+    fig = plt.figure(figsize=(6,4))
+    ax = fig.add_subplot()
+    ax.imshow(myImage)
     
 
 
