@@ -54,7 +54,8 @@ def secondFun():
 #         filename_graph = os.path.join('./static', f'picture.png')
         form.upload.data.save(filename)
 #         twist_image(filename, form.user.data) # func
-    return render_template('myTemplate.html', form=form, image_name=filename)
+#     return render_template('myTemplate.html', form=form, image_name=filename)
+    return " <html><head></head><body> Hello World!</body></html>"
 
 
 
