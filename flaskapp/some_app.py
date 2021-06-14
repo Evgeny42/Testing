@@ -45,7 +45,7 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
         form.upload.data.save(filename)
-    return render_template('myTemplate.html', form=form, image_name=filename)
+    return render_template('main.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
