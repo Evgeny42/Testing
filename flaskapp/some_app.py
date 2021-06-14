@@ -20,12 +20,12 @@ import numpy as np
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return " <html><head></head><body> Hello World!</body></html>"
-
-if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000)
+class MyForm(FlaskForm):
+    upload = FileField('Load image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
+    recaptcha = RecaptchaField()
+    user = TextField()
+    submit = SubmitField('OK')    
+    
     
 SECRET_KEY = 'secret'
 app.config['SECRET_KEY'] = SECRET_KEY
@@ -37,13 +37,8 @@ app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 
 bootstrap = Bootstrap(app)
     
-class MyForm(FlaskForm):
-    upload = FileField('Load image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
-    recaptcha = RecaptchaField()
-    user = TextField()
-    submit = SubmitField('OK')
-    
-@app.route("/s", methods=['GET', 'POST'])
+
+@app.route("/", methods=['GET', 'POST'])
 def secondFun():
     form = MyForm()
     filename = None
@@ -55,7 +50,13 @@ def secondFun():
         form.upload.data.save(filename)
 #         twist_image(filename, form.user.data) # func
     return render_template('myTemplate.html', form=form, image_name=filename)
-#     return " <html><head></head><body> Hello World!</body></html>"
+
+if __name__ == "__main__":
+    app.run(host='127.0.0.1', port=5000)
+
+
+    
+
 
 
 
