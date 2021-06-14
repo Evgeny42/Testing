@@ -19,10 +19,24 @@ import numpy as np
 
 app = Flask(__name__)
 
-# декоратор для вывода страницы по умолчанию
-@app.route("/")
-def hello():
-    return " <html><head></head><body>Hello World!</body></html>"
+class MyForm(FlaskForm):
+    upload = FileField('Load image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
+    recaptcha = RecaptchaField()
+    user = TextField()
+    submit = SubmitField('send')
+
+@app.route("/", methods=['GET', 'POST'])
+def main():
+    form = MyForm()
+    filename = None
+    filename_graph=None
+    if form.validate_on_submit():
+        photo = form.upload.data.filename.split('.')[-1]
+        filename = os.path.join('./static', f'photo.{photo}')
+#         filename_graph = os.path.join('./static', f'picture.png')
+        form.upload.data.save(filename)
+#         twist_image(filename, form.user.data) # func
+    return render_template('myTemplate.html', form=form, image_name=filename)
   
 SECRET_KEY = 'secret'
 app.config['SECRET_KEY'] = SECRET_KEY
@@ -33,10 +47,6 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = '6LenXSsbAAAAALFvL7os3RcyzKnYADCcTW37GBPH'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 
 bootstrap = Bootstrap(app)
-
-@app.route("/pic")
-def pic():
-    return " <html><head></head><body><img src="https://media.istockphoto.com/photos/business-man-pushing-large-stone-up-to-hill-business-heavy-tasks-and-picture-id825383494?k=6&amp;m=825383494&amp;s=612x612&amp;w=0&amp;h=pamh6qxyNPCnNAVru4BrAHt2qTHAGCD9lDiN_6MbaNY=" alt="66,296 Struggle Stock Photos, Pictures &amp;amp; Royalty-Free Images - iStock" jsname="HiaYvf" jsaction="load:XAeZkd;" class="n3VNCb" data-noaft="1" style="width: 383px; height: 217.784px; margin: 0px;"></body></html>"  
   
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
