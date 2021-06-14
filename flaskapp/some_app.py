@@ -44,7 +44,6 @@ def main():
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
-        print(f"filename = {filename}")
         form.upload.data.save(filename)
     return render_template('main.html', form=form, image_name=filename)
 
