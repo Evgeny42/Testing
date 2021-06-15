@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
+# инициализируем папку с изображением 
 IMAGE_FOLDER = os.path.join('static', 'images')
 
 app = Flask(__name__)
@@ -45,6 +46,7 @@ def main():
     filename = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
+        print(photo)
         filename = os.path.join('./static', f'photo.{photo}')
         form.upload.data.save(filename)
 #         show_image(filename)
@@ -53,10 +55,9 @@ def main():
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
     
-# @app.route("/i")
-# def show_image():
+
 @app.route('/index')
-def show_index():
+def show_image():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'picture.png')
     return render_template("index.html", user_image = full_filename)
 #     myImage = Image.open(filename)
