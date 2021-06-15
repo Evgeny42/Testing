@@ -29,7 +29,7 @@ app = Flask(__name__)
 class MyForm(FlaskForm):
     upload = FileField('Load image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
-    user = TextField()
+    user = TextField("Input")
     submit = SubmitField('OK')    
     
     
