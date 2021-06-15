@@ -29,7 +29,7 @@ app = Flask(__name__)
 class MyForm(FlaskForm):
     upload = FileField('Load image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
-    user = TextField("Input")
+    user = TextField("\tInput")
     submit = SubmitField('OK')    
     
     
@@ -56,7 +56,7 @@ def main():
 #         fig = plt.figure(figsize=(6, 4))
 #         ax = fig.add_subplot(1,1,1)
 #         ax.imshow(im)
-    return render_template('main.html', form=form, image_name=filename)
+    return render_template('main.html', form=form, image_name=filename, new_image_name=new_image_name)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
