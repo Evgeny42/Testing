@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
+IMAGE_FOLDER = os.path.join('static', 'images')
 
 app = Flask(__name__)
 
@@ -28,6 +29,7 @@ class MyForm(FlaskForm):
     
     
 SECRET_KEY = 'secret'
+app.config['UPLOAD_FOLDER'] = IMAGE_FOLDER
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] = '6LenXSsbAAAAABPqpQZ3RpkDt42hxynW7j7SZxpm'
