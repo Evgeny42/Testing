@@ -45,7 +45,10 @@ bootstrap = Bootstrap(app)
 
 def change_pic(path, value):
     im = Image.open(path)
-    pic_arr = np.asarray(im)
+    for i in range(0,200):
+        for j in range(0,200):
+            im.putpixel((i,j),(255,255,255))
+#     pic_arr = np.asarray(im)
     im.save(path)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -59,18 +62,9 @@ def main():
         change_pic(filename, form.user.data)
     return render_template('main.html', form=form, image_name=filename)
 
+# Запускаем наше приложение
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
     
-
-# @app.route('/index')
-# def show_image():
-#     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'picture.png')
-#     return render_template("index.html", user_image = full_filename)
-    
-
-
-
-
     
     
