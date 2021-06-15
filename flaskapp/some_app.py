@@ -57,9 +57,9 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static/images', f'photo.{photo}')
         form.upload.data.save(filename)
-        filename_copy = filename
+#         filename_copy = filename
         change_pic(filename, form.user.data)
-    return render_template('main.html', form=form, image_name=filename_copy)
+    return render_template('main.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
