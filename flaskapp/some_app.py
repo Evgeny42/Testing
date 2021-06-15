@@ -49,7 +49,12 @@ def main():
     form = MyForm()
     filename = None
     if form.validate_on_submit():
-        pass
+        photo = form.upload.data.filename.split('.')[-1]
+        filename = os.path.join('./static/images', f'photo.{photo}')
+        im = Image.open(file_name)
+        fig = plt.figure(figsize=(6, 4))
+        ax = fig.add_subplot(1,1,1)
+        ax.imshow(im)
     return render_template('main.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
