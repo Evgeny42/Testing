@@ -59,6 +59,7 @@ def change_contrast(path, level):
     def contrast(c):
         return 128 + factor * (c - 128)
     img = img.point(contrast)
+    img.save(path)
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
