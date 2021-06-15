@@ -43,15 +43,22 @@ app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 
 bootstrap = Bootstrap(app)
 
-def change_pic(path, value):
-    im = Image.open(path)
-#     for i in range(0,200):
-#         for j in range(0,200):
-#             im.putpixel((i,j),(255,255,255))
-#     pic_arr = np.asarray(im)
-    a = np.asarray(im)
-    im = Image.fromarray(a)
-    im.save(path)
+# def change_pic(path, value):
+#     im = Image.open(path)
+# #     for i in range(0,200):
+# #         for j in range(0,200):
+# #             im.putpixel((i,j),(255,255,255))
+# #     pic_arr = np.asarray(im)
+#     a = np.asarray(im)
+#     im = Image.fromarray(a)
+#     im.save(path)
+
+def change_contrast(path, level):
+    img = Image.open(path)
+    factor = (259 * (level + 255)) / (255 * (259 - level))
+    def contrast(c):
+        return 128 + factor * (c - 128)
+    img.point(contrast)
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -61,7 +68,7 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static/images', f'photo.{photo}')
         form.upload.data.save(filename)
-        change_pic(filename, form.user.data)
+        change_contrast(filename, form.user.data)
     return render_template('main.html', form=form, image_name=filename)
 
 # Запускаем наше приложение
