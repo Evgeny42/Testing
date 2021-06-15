@@ -54,7 +54,7 @@ def main():
         form.upload.data.save(filename)
         
         img = Image.open(filename)
-        image.show()
+        img.show()
         
 #         show_image(filename)
     return render_template('main.html', form=form, image_name=filename)
