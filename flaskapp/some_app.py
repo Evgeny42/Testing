@@ -58,7 +58,7 @@ def change_contrast(path, level):
     factor = (259 * (level + 255)) / (255 * (259 - level))
     def contrast(c):
         return 128 + factor * (c - 128)
-    img.point(contrast)
+    img = img.point(contrast)
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
