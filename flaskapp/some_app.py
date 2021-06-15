@@ -46,7 +46,7 @@ bootstrap = Bootstrap(app)
 def change_pic(path, value):
     im = Image.open(path)
     x, y = im.size
-    im = [:][:] * [1.5, 1,1]
+    im = im[:][:] * [1.5, 1,1]
     im.save(path)
 
 @app.route("/", methods=['GET', 'POST'])
