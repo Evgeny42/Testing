@@ -51,6 +51,7 @@ def main():
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static/images', f'photo.{photo}')
+        form.upload.data.save(filename)
         im = Image.open(filename)
         fig = plt.figure(figsize=(6, 4))
         ax = fig.add_subplot(1,1,1)
