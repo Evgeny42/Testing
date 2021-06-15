@@ -42,27 +42,8 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = '6LenXSsbAAAAALFvL7os3RcyzKnYADCcTW37GBPH'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 
 bootstrap = Bootstrap(app)
-  
-    
-def show(file_name):
-    im = Image.open(file_name)
-    fig = plt.figure(figsize=(6, 4))
-    ax = fig.add_subplot()
-    data = np.random.randint(0, 255, (100, 100))
-    ax.imshow(im, cmap='plasma')
-    b = ax.pcolormesh(data, edgecolors='black', cmap='plasma')
-    fig.colorbar(b, ax=ax)
-    gr_path = "./static/picture.png"
-    sns.displot(data)
-    plt.show()
-    plt.savefig(gr_path)
-    plt.close()
-    im = Image.open(file_name)
-    x, y = im.size
-    im.save(file_name)    
 
-    
-    
+
 @app.route("/", methods=['GET', 'POST'])
 def main():
     form = MyForm()
@@ -71,14 +52,18 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
         form.upload.data.save(filename)
-        show(filename)
+        
+        img = Image.open('filename')
+        image.show()
+        
+#         show_image(filename)
     return render_template('main.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
     
 
-@app.route('/index')
+# @app.route('/index')
 def show_image(filename):
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'picture.png')
     return render_template("index.html", user_image = full_filename)
