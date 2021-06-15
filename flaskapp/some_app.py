@@ -53,7 +53,7 @@ def main():
         filename = os.path.join('./static', f'photo.{photo}')
         form.upload.data.save(filename)
         
-        img = Image.open('filename')
+        img = Image.open(filename)
         image.show()
         
 #         show_image(filename)
