@@ -43,10 +43,10 @@ app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 
 bootstrap = Bootstrap(app)
 
-# def change_pic(path):
-#     image = Image.open(path)
-#     image.
-#     return
+def change_pic(path, value):
+    im = Image.open(path)
+    x, y = im.size
+    im.save(path)
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -56,9 +56,7 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static/images', f'photo.{photo}')
         form.upload.data.save(filename)
-#         new_image_name = change_pic(filename)
-        image = Image.open(filename)
-        image.show()
+        change_pic(filename, form.user.data)
     return render_template('main.html', form=form, image_name=filename, new_image_name=new_image_name)
 
 if __name__ == "__main__":
