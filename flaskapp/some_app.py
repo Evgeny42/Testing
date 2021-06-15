@@ -59,7 +59,7 @@ if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
     
 
-# @app.route('/index')
+@app.route('/index')
 def show_image(filename):
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     return render_template("index.html", user_image = full_filename)
