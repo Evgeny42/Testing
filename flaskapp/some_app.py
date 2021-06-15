@@ -44,7 +44,7 @@ app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 bootstrap = Bootstrap(app)
   
     
-def twist_image(file_name):
+def show(file_name):
     im = Image.open(file_name)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot()
