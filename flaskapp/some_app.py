@@ -46,8 +46,8 @@ bootstrap = Bootstrap(app)
 def change_pic(path, value):
     im = Image.open(path)
     x,y = im.size
-    for i in range(0,300):
-        for j in range(0,300):
+    for i in range(0,x):
+        for j in range(0,y):
             im.putpixel((i,j),(int(255),int(255),int(255))) 
     im.save(path)
 
