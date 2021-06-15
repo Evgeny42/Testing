@@ -48,7 +48,7 @@ def change_pic(path, value):
     x,y = im.size
     for i in range(0,300):
         for j in range(0,300):
-            im.putpixel((i,j),(int(4),int(10),int(14))) 
+            im.putpixel((i,j),(int(255),int(255),int(255))) 
     im.save(path)
 
 
