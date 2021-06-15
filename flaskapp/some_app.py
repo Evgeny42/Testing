@@ -52,7 +52,7 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
         form.upload.data.save(filename)
-        show_image(filename)
+#         show_image(filename)
     return render_template('main.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
 @app.route('/index')
 def show_image(filename):
-    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'picture.png')
     return render_template("index.html", user_image = full_filename)
 #     myImage = Image.open(filename)
 #     fig = plt.figure(figsize=(6,4))
