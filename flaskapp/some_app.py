@@ -48,9 +48,9 @@ def change_pic(path, value):
     x,y = im.size
 #     a = np.asarray(im)
     
-#     for i in range(0,x):
-#         for j in range(0,y):
-#             im.putpixel((i,j),(100,200,150))
+    for i in range(0,x-1):
+        for j in range(0,y-1):
+            im.putpixel((i,j),(0,0,0))
 #     pic_arr = np.asarray(im)
 #     im = Image.fromarray(a)
     im.save(path)
