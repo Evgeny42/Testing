@@ -54,7 +54,7 @@ def show(file_name):
     fig.colorbar(b, ax=ax)
     gr_path = "./static/picture.png"
     sns.displot(data)
-    #plt.show()
+    plt.show()
     plt.savefig(gr_path)
     plt.close()
     im = Image.open(file_name)
