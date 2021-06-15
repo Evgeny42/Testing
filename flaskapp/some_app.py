@@ -49,7 +49,7 @@ def main():
     form = MyForm()
     filename = None
     if form.validate_on_submit():
-        return redirect(url_for('index', user_image=os.path.join(app.config['UPLOAD_FOLDER'], 'picture.png')))
+        pass
     return render_template('main.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
