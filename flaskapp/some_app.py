@@ -22,6 +22,10 @@ IMAGE_FOLDER = os.path.join('static', 'images')
 
 app = Flask(__name__)
 
+# Визуальная составляющая страницы описывается 
+# с помощью наследования нашего класса от FlaskForm
+# в котором мы инициализируем поле для загрузки файла,
+# поле капчи, текстовое поле и кнопку подтверждения
 class MyForm(FlaskForm):
     upload = FileField('Load image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
