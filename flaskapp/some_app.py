@@ -49,28 +49,17 @@ def main():
     form = MyForm()
     filename = None
     if form.validate_on_submit():
-        photo = form.upload.data.filename.split('.')[-1]
-        filename = os.path.join('./static/images', f'photo.{photo}')
-        form.upload.data.save(filename)
-        
-        img = Image.open(filename)
-        img.show()
-        
-#         show_image(filename)
+        return redirect(url_for('index', date=date))
     return render_template('main.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
     
 
-# @app.route('/index')
+@app.route('/index')
 def show_image(filename):
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'picture.png')
     return render_template("index.html", user_image = full_filename)
-#     myImage = Image.open(filename)
-#     fig = plt.figure(figsize=(6,4))
-#     ax = fig.add_subplot()
-#     ax.imshow(myImage)
     
 
 
