@@ -57,7 +57,7 @@ if __name__ == "__main__":
     
 
 @app.route('/index')
-def show_image(filename):
+def show_image():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'picture.png')
     return render_template("index.html", user_image = full_filename)
     
