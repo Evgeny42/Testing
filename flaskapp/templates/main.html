@@ -1,9 +1,9 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 <!-- задаем заголовок страницы -->
-{% block title %}This is an page{% endblock %}
+{% block title %}Lab3{% endblock %}
 <!-- блок body -->
 {% block content %}
-{{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="test") }}
+{{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="index") }}
 <!-- один из стандартных тэгов html - заголовок второго уровня -->
 {% endblock %}
