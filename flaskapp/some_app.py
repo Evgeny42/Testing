@@ -46,13 +46,9 @@ bootstrap = Bootstrap(app)
 def change_pic(path, value):
     im = Image.open(path)
     x,y = im.size
-#     a = np.asarray(im)
-    
     for i in range(0,x-1):
         for j in range(0,y-1):
-            im.putpixel((i,j),(int(0),int(0),int(0)))
-#     pic_arr = np.asarray(im)
-#     im = Image.fromarray(a)
+            im.putpixel((i,j),(int(4),int(10),int(14))) 
     im.save(path)
 
 
