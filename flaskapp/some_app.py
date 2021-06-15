@@ -45,17 +45,22 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
         form.upload.data.save(filename)
-        show_image(filename)
+#         show_image(filename)
     return render_template('main.html', form=form, image_name=filename)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
-
-def show_image(filename):
-    myImage = Image.open(filename)
-    fig = plt.figure(figsize=(6,4))
-    ax = fig.add_subplot()
-    ax.imshow(myImage)
+    
+@app.route("/i")
+def show_image():
+    @app.route('/index')
+def show_index():
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'picture.png')
+    return render_template("index.html", user_image = full_filename)
+#     myImage = Image.open(filename)
+#     fig = plt.figure(figsize=(6,4))
+#     ax = fig.add_subplot()
+#     ax.imshow(myImage)
     
 
 
