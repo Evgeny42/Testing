@@ -47,8 +47,8 @@ def change_pic(path, value):
     im = Image.open(path)
     x, y = im.size
     pic_arr = np.asarray(im)
-    pic_arr = pic_arr[:][:] * [1.5,1,1]
-    im = Image.fromarray(pic_arr)
+    pic_arr = pic_arr[20:50,:] = [100,150,200]
+#     im = Image.fromarray(pic_arr)
     im.save(path)
 
 @app.route("/", methods=['GET', 'POST'])
