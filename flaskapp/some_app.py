@@ -45,10 +45,12 @@ bootstrap = Bootstrap(app)
 
 def change_pic(path, value):
     im = Image.open(path)
-    for i in range(0,200):
-        for j in range(0,200):
-            im.putpixel((i,j),(255,255,255))
+#     for i in range(0,200):
+#         for j in range(0,200):
+#             im.putpixel((i,j),(255,255,255))
 #     pic_arr = np.asarray(im)
+    a = np.asarray(im)
+    im = Image.fromarray(a)
     im.save(path)
 
 @app.route("/", methods=['GET', 'POST'])
