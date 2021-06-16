@@ -15,6 +15,7 @@ from io import BytesIO
 import json
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # инициализируем папку с изображением 
 IMAGE_FOLDER = os.path.join('static', 'images')
@@ -44,11 +45,13 @@ bootstrap = Bootstrap(app)
 
 def change_pic(path, value):
     
+#     fig = plt.figure(figsize=(6, 4))
+#     ax = fig.add_subplot()
+#     gr_path = "./static/pictures/picture.png"
+#     plt.savefig(gr_path)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot()
-    gr_path = "./static/pictures/picture.png"
-    plt.savefig(gr_path)
-#     plt.close()
+    temp = np.asarray(im)
     
     im = Image.open(path)
     # Из введенной строки пользователем
