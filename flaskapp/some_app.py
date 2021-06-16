@@ -43,12 +43,23 @@ bootstrap = Bootstrap(app)
 
 def change_pic(path, value):
     im = Image.open(path)
-    x,y = im.size
-    a = np.asarray(im)
-    for i in range(0,x):
-        for j in range(0,y):
-#             im.putpixel((i,j),(int(0),int(0),int(0))) 
-            im.putpixel((i,j),(a[i][j][0],a[i][j][1],a[i][j][2])) 
+    # Из введенной строки пользователем
+    # удаляем все символы кроме букв
+    for i in value:
+        if (i.isalpha() is False):
+            value = value.replace(i, "")
+    # Приводим символы к нижнему регистру
+    value = value.lower()
+    if ("r" in value) and ("g" in value) and ("b" in value):
+        # Заменяем символы r,g,b на соответствующие индексы
+        value = value.replace("r", "0")
+        value = value.replace("g", "1")
+        value = value.replace("b", "2")
+        x,y = im.size
+        a = np.asarray(im)
+        for i in range(0,y):
+            for j in range(0,x):
+                im.putpixel((j,i),(a[i][j][int(value[0])],a[i][j][value[1]],a[i][j][value[2]]))
     im.save(path)
 
 
