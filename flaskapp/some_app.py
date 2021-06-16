@@ -74,13 +74,13 @@ def change_pic(path, value):
         percOfGreen = sumGreen / allColor * 100
         percOfBlue = sumBlue / allColor * 100
 
-#         # 
-#         value = [int(percOfRed), int(percOfGreen), int(percOfBlue)]
-#         fig, ax = plt.subplots()
-#         # Используем гистограмму
-#         # Передаем название для каждой (цвет)
-#         # и его соответствующее значение
-#         ax.bar(colorList, value)
+        # 
+        valueList = [int(percOfRed), int(percOfGreen), int(percOfBlue)]
+        fig, ax = plt.subplots()
+        # Используем гистограмму
+        # Передаем название для каждой (цвет)
+        # и его соответствующее значение
+        ax.bar(colorList, valueList)
 
         # Устанавливаем цвет графика
 #         ax.set_facecolor('seashell')
