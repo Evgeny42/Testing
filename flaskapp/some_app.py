@@ -44,15 +44,7 @@ app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 bootstrap = Bootstrap(app)
 
 def change_pic(path, value):
-    
-#     fig = plt.figure(figsize=(6, 4))
-#     ax = fig.add_subplot()
-#     gr_path = "./static/pictures/picture.png"
-#     plt.savefig(gr_path)
-    fig = plt.figure(figsize=(6, 4))
-    ax = fig.add_subplot()
-    temp = np.asarray(im)
-    
+
     im = Image.open(path)
     # Из введенной строки пользователем
     # удаляем все символы кроме букв
@@ -70,6 +62,11 @@ def change_pic(path, value):
         x,y = im.size
         # сохраняем картинку в виде массива numpy
         a = np.asarray(im)
+        
+        sumRed = np.sum(arr[:,:,0])
+        sumGreen = np.sum(arr[:,:,1])
+        sumBlue = np.sum(arr[:,:,2])
+        
         # Проходясь по картинке изменяем цвета пикселей 
         # в зависимости от выбранного порядка цветовых карт
         for i in range(0,y):
@@ -82,11 +79,9 @@ def change_pic(path, value):
 def main():
     form = MyForm()
     filename = None
-    filename_graph = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static/images', f'photo.{photo}')
-        filename_graph = os.path.join('./static/images', f'picture.png')
         form.upload.data.save(filename)
         change_pic(filename, form.user.data)
     return render_template('main.html', form=form, image_name=filename, filename_graph=filename_graph)
