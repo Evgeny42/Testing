@@ -44,11 +44,11 @@ bootstrap = Bootstrap(app)
 
 def change_pic(path, value):
     
-    fig = plt.figure(figsize=(6, 4))
-    ax = fig.add_subplot()
-    gr_path = "./static/pictures/newgr.png"
-    plt.savefig(gr_path)
-    plt.close()
+#     fig = plt.figure(figsize=(6, 4))
+#     ax = fig.add_subplot()
+#     gr_path = "./static/pictures/newgr.png"
+#     plt.savefig(gr_path)
+#     plt.close()
     
     im = Image.open(path)
     # Из введенной строки пользователем
@@ -83,7 +83,7 @@ def main():
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static/images', f'photo.{photo}')
-        filename_graph = os.path.join('./static/images', f'newgr.png')
+#         filename_graph = os.path.join('./static/images', f'newgr.png')
         form.upload.data.save(filename)
         change_pic(filename, form.user.data)
     return render_template('main.html', form=form, image_name=filename, filename_graph=filename_graph)
