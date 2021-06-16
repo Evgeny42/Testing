@@ -55,8 +55,12 @@ def change_pic(path, value):
         value = value.replace("r", "0")
         value = value.replace("g", "1")
         value = value.replace("b", "2")
+        # Сохраняем размерность картинки
         x,y = im.size
+        # сохраняем картинку в виде массива numpy
         a = np.asarray(im)
+        # Проходясь по картинке изменяем цвета пикселей 
+        # в зависимости от выбранного порядка цветовых карт
         for i in range(0,y):
             for j in range(0,x):
                 im.putpixel((j,i),(a[i][j][int(value[0])],a[i][j][int(value[1])],a[i][j][int(value[2])]))
