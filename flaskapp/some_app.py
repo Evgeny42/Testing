@@ -68,11 +68,11 @@ def change_pic(path, value):
         sumBlue = np.sum(a[:,:,2])
         colorList = ["red", "green", "blue"]
         
-#         # получаем значение каждого цвета в процентах
-#         allColor = sumRed + sumGreen + sumBlue
-#         percOfRed = sumRed / allColor * 100
-#         percOfGreen = sumGreen / allColor * 100
-#         percOfBlue = sumBlue / allColor * 100
+        # получаем значение каждого цвета в процентах
+        allColor = sumRed + sumGreen + sumBlue
+        percOfRed = sumRed / allColor * 100
+        percOfGreen = sumGreen / allColor * 100
+        percOfBlue = sumBlue / allColor * 100
 
 #         # 
 #         value = [int(percOfRed), int(percOfGreen), int(percOfBlue)]
