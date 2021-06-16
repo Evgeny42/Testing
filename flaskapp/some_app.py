@@ -46,7 +46,7 @@ def change_pic(path, value):
     
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot()
-#     gr_path = "./static/pictures/newgr.png"
+    gr_path = "./static/pictures/picture.png"
 #     plt.savefig(gr_path)
 #     plt.close()
     
