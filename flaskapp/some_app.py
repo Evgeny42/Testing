@@ -63,9 +63,9 @@ def change_pic(path, value):
         # сохраняем картинку в виде массива numpy
         a = np.asarray(im)
         
-        sumRed = np.sum(arr[:,:,0])
-        sumGreen = np.sum(arr[:,:,1])
-        sumBlue = np.sum(arr[:,:,2])
+        sumRed = np.sum(a[:,:,0])
+        sumGreen = np.sum(a[:,:,1])
+        sumBlue = np.sum(a[:,:,2])
         
         # Проходясь по картинке изменяем цвета пикселей 
         # в зависимости от выбранного порядка цветовых карт
