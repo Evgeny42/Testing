@@ -63,10 +63,10 @@ def change_pic(path, value):
         # сохраняем картинку в виде массива numpy
         a = np.asarray(im)
         
-#         sumRed = np.sum(a[:,:,0])
-#         sumGreen = np.sum(a[:,:,1])
-#         sumBlue = np.sum(a[:,:,2])
-#         colorList = ["red", "green", "blue"]
+        sumRed = np.sum(a[:,:,0])
+        sumGreen = np.sum(a[:,:,1])
+        sumBlue = np.sum(a[:,:,2])
+        colorList = ["red", "green", "blue"]
         
 #         # получаем значение каждого цвета в процентах
 #         allColor = sumRed + sumGreen + sumBlue
