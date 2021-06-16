@@ -63,24 +63,24 @@ def change_pic(path, value):
         # сохраняем картинку в виде массива numpy
         a = np.asarray(im)
         
-        sumRed = np.sum(a[:,:,0])
-        sumGreen = np.sum(a[:,:,1])
-        sumBlue = np.sum(a[:,:,2])
-        colorList = ["red", "green", "blue"]
+#         sumRed = np.sum(a[:,:,0])
+#         sumGreen = np.sum(a[:,:,1])
+#         sumBlue = np.sum(a[:,:,2])
+#         colorList = ["red", "green", "blue"]
         
-        # получаем значение каждого цвета в процентах
-        allColor = sumRed + sumGreen + sumBlue
-        percOfRed = sumRed / allColor * 100
-        percOfGreen = sumGreen / allColor * 100
-        percOfBlue = sumBlue / allColor * 100
+#         # получаем значение каждого цвета в процентах
+#         allColor = sumRed + sumGreen + sumBlue
+#         percOfRed = sumRed / allColor * 100
+#         percOfGreen = sumGreen / allColor * 100
+#         percOfBlue = sumBlue / allColor * 100
 
-        # 
-        value = [int(percOfRed), int(percOfGreen), int(percOfBlue)]
-        fig, ax = plt.subplots()
-        # Используем гистограмму
-        # Передаем название для каждой (цвет)
-        # и его соответствующее значение
-        ax.bar(colorList, value)
+#         # 
+#         value = [int(percOfRed), int(percOfGreen), int(percOfBlue)]
+#         fig, ax = plt.subplots()
+#         # Используем гистограмму
+#         # Передаем название для каждой (цвет)
+#         # и его соответствующее значение
+#         ax.bar(colorList, value)
 
         # Устанавливаем цвет графика
 #         ax.set_facecolor('seashell')
