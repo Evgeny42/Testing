@@ -83,11 +83,11 @@ def change_pic(path, value):
         ax.bar(colorList, value)
 
         # Устанавливаем цвет графика
-        ax.set_facecolor('seashell')
-        fig.set_facecolor('floralwhite')
-        fig.set_figwidth(6)    #  ширина фигуры
-        fig.set_figheight(4)    #  высота фигуры
-        
+#         ax.set_facecolor('seashell')
+#         fig.set_facecolor('floralwhite')
+#         fig.set_figwidth(6)    #  ширина фигуры
+#         fig.set_figheight(4)    #  высота фигуры
+#         plt.show()
         
         # Проходясь по картинке изменяем цвета пикселей 
         # в зависимости от выбранного порядка цветовых карт
