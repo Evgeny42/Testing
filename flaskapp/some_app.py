@@ -84,7 +84,7 @@ def main():
         filename = os.path.join('./static/images', f'photo.{photo}')
         form.upload.data.save(filename)
         change_pic(filename, form.user.data)
-    return render_template('main.html', form=form, image_name=filename, filename_graph=filename_graph)
+    return render_template('main.html', form=form, image_name=filename)
 
 # Запускаем наше приложение
 if __name__ == "__main__":
