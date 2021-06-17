@@ -40,7 +40,8 @@ app.config['RECAPTCHA_PUBLIC_KEY'] = '6LenXSsbAAAAABPqpQZ3RpkDt42hxynW7j7SZxpm'
 app.config['RECAPTCHA_PRIVATE_KEY'] = '6LenXSsbAAAAALFvL7os3RcyzKnYADCcTW37GBPH'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 bootstrap = Bootstrap(app)
-def change_pic(path, value):
+
+def problem(path, value):
     im = Image.open(path)
     # Из введенной строки пользователем
     # удаляем все символы кроме букв
@@ -87,7 +88,7 @@ def change_pic(path, value):
         fig.set_figwidth(6)  #  ширина фигуры
         fig.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
-        plt.savefig("./static/images/myFig.png")
+        plt.savefig("./static/images/myFig1.png")
         plt.close()
         
         # Проходясь по картинке изменяем цвета пикселей 
@@ -97,19 +98,20 @@ def change_pic(path, value):
                 im.putpixel((j,i),(arr[i][j][int(value[0])],arr[i][j][int(value[1])],arr[i][j][int(value[2])]))
     # Сохраняем изображение
     im.save(path)
+    
 @app.route("/", methods=['GET', 'POST'])
 def main():
     form = MyForm()
     imagePath = None
-    graphPath = None
+    graphPath1 = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
-        graphPath = os.path.join('./static/images', f'myFig.png')
+        graphPath1 = os.path.join('./static/images', f'myFig1.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
-        change_pic(imagePath, form.user.data)
-    return render_template('main.html', form=form, image=imagePath, graph=graphPath)
+        problem(imagePath, form.user.data)
+    return render_template('main.html', form=form, image=imagePath, graph1=graphPath1)
 # Запускаем наше приложение
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
