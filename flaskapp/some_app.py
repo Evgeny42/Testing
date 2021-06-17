@@ -90,7 +90,7 @@ def page(path, value):
         fig.set_figwidth(6)  #  ширина фигуры
         fig.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
-        plt.savefig("./static/images/myFig1.png")
+        plt.savefig("./static/images/myFig.png")
 #         plt.close()
 		
 #         avrgColor = [0,0,0]
@@ -120,12 +120,12 @@ def main():
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
-        graphPath1 = os.path.join('./static/images', f'myFig1.png')
+        graphPath = os.path.join('./static/images', f'myFig.png')
 #         graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         page(imagePath, form.user.data)
-    return render_template('main.html', form=form, image=imagePath, graph1=graphPath1)#, graph2=graphPath2)
+    return render_template('main.html', form=form, image=imagePath, graph=graphPath)#, graph2=graphPath2)
 
 # Запускаем наше приложение
 if __name__ == "__main__":
