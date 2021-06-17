@@ -99,9 +99,7 @@ def problem(path, value):
             avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
         fig2, ax2 = plt.subplots()
         ax2.bar(colorList, avrgColor)
-	
-        ax.yaxis.set_major_locator(ticker.MultipleLocator(5))
-        ax.yaxis.set_minor_locator(ticker.MultipleLocator(1))
+
         ax2.set_facecolor('floralwhite')
         fig2.set_facecolor('seashell')
         fig2.set_figwidth(6)  #  ширина фигуры
