@@ -19,9 +19,7 @@ import seaborn as sns
 
 # инициализируем папку с изображением 
 IMAGE_FOLDER = os.path.join('static', 'images')
-
 app = Flask(__name__)
-
 # Визуальная составляющая страницы описывается 
 # с помощью наследования нашего класса от FlaskForm
 # в котором мы инициализируем поле для загрузки файла,
@@ -42,8 +40,7 @@ app.config['RECAPTCHA_PUBLIC_KEY'] = '6LenXSsbAAAAABPqpQZ3RpkDt42hxynW7j7SZxpm'
 app.config['RECAPTCHA_PRIVATE_KEY'] = '6LenXSsbAAAAALFvL7os3RcyzKnYADCcTW37GBPH'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 bootstrap = Bootstrap(app)
-
-def page(path, value):
+def change_pic(path, value):
     im = Image.open(path)
     # Из введенной строки пользователем
     # удаляем все символы кроме букв
@@ -53,57 +50,46 @@ def page(path, value):
     # Приводим символы к нижнему регистру
     value = value.lower()
     # Если в веденной строке пользователя встречаются символы
-    # r, g, b, то сработает программа
+    # r, g, b, то картинка изменится
     if ("r" in value) and ("g" in value) and ("b" in value):
         # Заменяем символы r,g,b на соответствующие индексы
         value = value.replace("r", "0")
         value = value.replace("g", "1")
         value = value.replace("b", "2")
+        # Сохраняем размерность картинки
+        x,y = im.size
         # сохраняем картинку в виде массива numpy
         arr = np.asarray(im)
-	# Сохраняем размер 
-        x,y = im.size
-        # Суммируем значение каждого цвета
         eachColorSum = [0,0,0]
         for i in range(3):
-            if value[i] == "0":
-                eachColorSum[0] = np.sum(arr[:,:,i])
-            elif value[i] == "1":
-                eachColorSum[1] = np.sum(arr[:,:,i])
-            elif value[i] == "2":
-                eachColorSum[2] = np.sum(arr[:,:,i])
-        # получаем значение каждого цвета в процентах
+        	if value[i] == "0":
+        		eachColorSum[0] = np.sum(arr[:,:,i])
+        	elif value[i] == "1":
+        		eachColorSum[1] = np.sum(arr[:,:,i])
+        	elif value[i] == "2":
+        		eachColorSum[2] = np.sum(arr[:,:,i])
+
         colorSum = eachColorSum[0] + eachColorSum[1] + eachColorSum[2]
-        # инициализируем список со значениями в процентах для каждого цвета
         colorPercent = [0,0,0]
         for i in range (3):
-            # Прописываем условие, чтобы избежать ошибки деления на 0
-            if colorSum != 0:
-                colorPercent[i] = eachColorSum[i] / colorSum * 100
+        	# Прописываем условие, чтобы избежать ошибки деления на 0
+        	if colorSum != 0:
+	        	colorPercent[i] = eachColorSum[i] / colorSum * 100
         fig, ax = plt.subplots()
         # Используем гистограмму
         # Передаем название для каждой (цвет)
         # и его соответствующее значение
         colorList = ["red", "green", "blue"]
         ax.bar(colorList, colorPercent)
-#         # Устанавливаем цвет графика
-#         ax.set_facecolor('seashell')
-#         fig.set_facecolor('floralwhite')
-#         fig.set_figwidth(6)  #  ширина фигуры
-#         fig.set_figheight(4)  #  высота фигуры
+        # Устанавливаем цвет графика
+        ax.set_facecolor('seashell')
+        fig.set_facecolor('floralwhite')
+        fig.set_figwidth(6)  #  ширина фигуры
+        fig.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
         plt.savefig("./static/images/myFig.png")
-#         plt.close()
-		
-#         avrgColor = [0,0,0]
-#         # Заполняем среднимим значениями
-#         for i in range (3):
-#            avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
-#         fig2, ax2 = plt.subplots()
-#         ax.pie(avrgColor, labels=colorList, colors=colorList)
-#         ax.axis("equal")
-#         plt.savefig("./static/images/myFig2.png")	
-#         plt.close()
+        plt.close()
+        
         # Проходясь по картинке изменяем цвета пикселей 
         # в зависимости от выбранного порядка цветовых карт
         for i in range(0,y):
@@ -111,27 +97,20 @@ def page(path, value):
                 im.putpixel((j,i),(arr[i][j][int(value[0])],arr[i][j][int(value[1])],arr[i][j][int(value[2])]))
     # Сохраняем изображение
     im.save(path)
-
-
 @app.route("/", methods=['GET', 'POST'])
 def main():
     form = MyForm()
     imagePath = None
-    graphPath1 = None
-#     graphPath2 = None
+    graphPath = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath = os.path.join('./static/images', f'myFig.png')
-#         graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
-        page(imagePath, form.user.data)
-    return render_template('main.html', form=form, image=imagePath, graph=graphPath)#, graph2=graphPath2)
-
+        change_pic(imagePath, form.user.data)
+    return render_template('main.html', form=form, image=imagePath, graph=graphPath)
 # Запускаем наше приложение
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
-    
-    
     
