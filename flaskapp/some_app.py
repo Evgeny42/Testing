@@ -115,7 +115,7 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath1 = os.path.join('./static/images', f'myFig1.png')
-	graphPath2 = os.path.join('./static/images', f'myFig2.png')
+# 	graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         problem(imagePath, form.user.data)
