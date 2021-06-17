@@ -91,6 +91,12 @@ def problem(path, value):
         plt.savefig("./static/images/myFig1.png")
         plt.close()
         
+	
+	
+	
+	
+	
+	
         # Проходясь по картинке изменяем цвета пикселей 
         # в зависимости от выбранного порядка цветовых карт
         for i in range(0,y):
@@ -104,10 +110,12 @@ def main():
     form = MyForm()
     imagePath = None
     graphPath1 = None
+    graphPath2 = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath1 = os.path.join('./static/images', f'myFig1.png')
+	graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         problem(imagePath, form.user.data)
