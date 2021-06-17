@@ -93,7 +93,15 @@ def problem(path, value):
         
 	
 	
-	
+        avrgColor = [0,0,0]
+        # Заполняем среднимим значениями
+        for i in range (3):
+            avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
+        fig2, ax2 = plt.subplots()
+        ax2.pie(avrgColor, labels=colorList, colors=colorList)
+        ax2.axis("equal")
+        plt.savefig("./static/images/myFig2.png") 
+        plt.close()
 	
 	
 	
@@ -115,7 +123,7 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath1 = os.path.join('./static/images', f'myFig1.png')
-# 	graphPath2 = os.path.join('./static/images', f'myFig2.png')
+        graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         problem(imagePath, form.user.data)
