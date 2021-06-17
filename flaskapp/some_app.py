@@ -117,7 +117,8 @@ def change_pic(path, value):
 def main():
     form = MyForm()
     imagePath = None
-    graphPath = None
+    graphPath1 = None
+    graphPath1 = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
