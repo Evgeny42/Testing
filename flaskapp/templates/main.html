@@ -8,11 +8,10 @@
 
 {% if image %}
 
- <h2>Ваше изображение: </h2>
+ <h3>Ваше изображение: </h3>
  <p>{{image}}
  <p><img src="{{image}}" class="img-rounded" alt="My Image" width = 224 height=224 />
+ <h3>График распределения цветов: </h3>
  <p><img src="{{graph}}" class="img-rounded" alt="My Graph" width = 280 height=224 />
-{% else %}
- <p> Пока что нет изображения </p>
 {% endif %}
 {% endblock %}
