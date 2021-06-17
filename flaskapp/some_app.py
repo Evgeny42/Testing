@@ -92,21 +92,21 @@ def problem(path, value):
         plt.close()
         
 	
-# 	# Средний цвет
-#         avrgColor = [0,0,0]
-#         # Заполняем среднимим значениями
-#         for i in range (3):
-#             avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
-#         fig2, ax2 = plt.subplots()
-#         ax2.bar(colorList, avrgColor)
+	# Средний цвет
+        avrgColor = [0,0,0]
+        # Заполняем среднимим значениями
+        for i in range (3):
+            avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
+        fig2, ax2 = plt.subplots()
+        ax2.bar(colorList, avrgColor)
 	
-# 	ax2.set_facecolor('floralwhite')
-#         fig2.set_facecolor('seashell')
-#         fig2.set_figwidth(6)  #  ширина фигуры
-#         fig2.set_figheight(4)  #  высота фигуры
+        ax2.set_facecolor('floralwhite')
+        fig2.set_facecolor('seashell')
+        fig2.set_figwidth(6)  #  ширина фигуры
+        fig2.set_figheight(4)  #  высота фигуры
 	
-#         plt.savefig("./static/images/myFig2.png") 
-#         plt.close()
+        plt.savefig("./static/images/avrg.png") 
+        plt.close()
 	
 	
 	
@@ -123,12 +123,12 @@ def main():
     form = MyForm()
     imagePath = None
     graphPath1 = None
-#     graphPath2 = None
+    graphPath2 = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath1 = os.path.join('./static/images', f'myFig1.png')
-#         graphPath2 = os.path.join('./static/images', f'myFig2.png')
+        graphPath2 = os.path.join('./static/images', f'avrg.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         problem(imagePath, form.user.data)
