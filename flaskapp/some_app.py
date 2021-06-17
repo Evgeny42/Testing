@@ -97,16 +97,16 @@ def problem(path, value):
         # Заполняем среднимим значениями
         for i in range (3):
             avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
-        fig2, ax2 = plt.subplots()
-        ax2.bar(colorList, avrgColor)
+#         fig2, ax2 = plt.subplots()
+#         ax2.bar(colorList, avrgColor)
 	
-	ax2.set_facecolor('floralwhite')
-        fig2.set_facecolor('seashell')
-        fig2.set_figwidth(6)  #  ширина фигуры
-        fig2.set_figheight(4)  #  высота фигуры
+# 	ax2.set_facecolor('floralwhite')
+#         fig2.set_facecolor('seashell')
+#         fig2.set_figwidth(6)  #  ширина фигуры
+#         fig2.set_figheight(4)  #  высота фигуры
 	
-        plt.savefig("./static/images/myFig2.png") 
-        plt.close()
+#         plt.savefig("./static/images/myFig2.png") 
+#         plt.close()
 	
 	
 	
