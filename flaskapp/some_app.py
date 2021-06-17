@@ -41,11 +41,9 @@ app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] = '6LenXSsbAAAAABPqpQZ3RpkDt42hxynW7j7SZxpm'
 app.config['RECAPTCHA_PRIVATE_KEY'] = '6LenXSsbAAAAALFvL7os3RcyzKnYADCcTW37GBPH'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
-
 bootstrap = Bootstrap(app)
 
 def change_pic(path, value):
-
     im = Image.open(path)
     # Из введенной строки пользователем
     # удаляем все символы кроме букв
@@ -74,8 +72,7 @@ def change_pic(path, value):
         percOfRed = sumRed / allColor * 100
         percOfGreen = sumGreen / allColor * 100
         percOfBlue = sumBlue / allColor * 100
-
-        # 
+        # инициализируем список со значениями в процентах для каждого цвета
         valueList = [int(percOfRed), int(percOfGreen), int(percOfBlue)]
         fig, ax = plt.subplots()
         # Используем гистограмму
