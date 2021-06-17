@@ -94,7 +94,7 @@ def change_pic(path, value):
         # Сохраняем фигуру
         plt.savefig("./static/images/myFig1.png")
         plt.close()
-	
+		
 		avrgColor = [0,0,0]
 		# Заполняем среднимим значениями
 		for i in range (3):
