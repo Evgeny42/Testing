@@ -132,7 +132,7 @@ def main():
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         problem(imagePath, form.user.data)
-    return render_template('main.html', form=form, image=imagePath, graph1=graphPath1)
+    return render_template('main.html', form=form, image=imagePath, graph1=graphPath1, graph2=graphPath2)
 # Запускаем наше приложение
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
