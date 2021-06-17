@@ -62,11 +62,11 @@ def change_pic(path, value):
         # Сохраняем размерность картинки
         x,y = im.size
         # сохраняем картинку в виде массива numpy
-        a = np.asarray(im)
-        
-        sumRed = np.sum(a[:,:,0])
-        sumGreen = np.sum(a[:,:,1])
-        sumBlue = np.sum(a[:,:,2])
+        arr = np.asarray(im)
+        # Суммируем значение каждого цвета
+        sumRed = np.sum(arr[:,:,0])
+        sumGreen = np.sum(arr[:,:,1])
+        sumBlue = np.sum(arr[:,:,2])
         colorList = ["red", "green", "blue"]
         
         # получаем значение каждого цвета в процентах
@@ -88,6 +88,7 @@ def change_pic(path, value):
         fig.set_facecolor('floralwhite')
         fig.set_figwidth(6)  #  ширина фигуры
         fig.set_figheight(4)  #  высота фигуры
+        # Сохраняем фигуру
         plt.savefig("./static/images/myFig.png")
         plt.close()
         
@@ -95,22 +96,24 @@ def change_pic(path, value):
         # в зависимости от выбранного порядка цветовых карт
         for i in range(0,y):
             for j in range(0,x):
-                im.putpixel((j,i),(a[i][j][int(value[0])],a[i][j][int(value[1])],a[i][j][int(value[2])]))
+                im.putpixel((j,i),(arr[i][j][int(value[0])],arr[i][j][int(value[1])],arr[i][j][int(value[2])]))
+    # Сохраняем изображение
     im.save(path)
 
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
     form = MyForm()
-    filename = None
-    filename_graph = None
+    imagePath = None
+    graphPath = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
-        filename = os.path.join('./static/images', f'photo.{photo}')
-        filename_graph = os.path.join('./static/images', f'myFig.png')
-        form.upload.data.save(filename)
-        change_pic(filename, form.user.data)
-    return render_template('main.html', form=form, image_name=filename, filename_graph=filename_graph)
+        imagePath = os.path.join('./static/images', f'photo.{photo}')
+        graphPath = os.path.join('./static/images', f'myFig.png')
+        # Сохраняем наше загруженное изображение
+        form.upload.data.save(imagePath)
+        change_pic(imagePath, form.user.data)
+    return render_template('main.html', form=form, image=imagePath, graph=graphPath)
 
 # Запускаем наше приложение
 if __name__ == "__main__":
