@@ -43,7 +43,7 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = '6LenXSsbAAAAALFvL7os3RcyzKnYADCcTW37GBPH'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 bootstrap = Bootstrap(app)
 
-def change_pic(path, value):
+def page(path, value):
     im = Image.open(path)
     # Из введенной строки пользователем
     # удаляем все символы кроме букв
@@ -53,14 +53,12 @@ def change_pic(path, value):
     # Приводим символы к нижнему регистру
     value = value.lower()
     # Если в веденной строке пользователя встречаются символы
-    # r, g, b, то картинка изменится
+    # r, g, b, то сработает программа
     if ("r" in value) and ("g" in value) and ("b" in value):
         # Заменяем символы r,g,b на соответствующие индексы
         value = value.replace("r", "0")
         value = value.replace("g", "1")
         value = value.replace("b", "2")
-        # Сохраняем размерность картинки
-        x,y = im.size
         # сохраняем картинку в виде массива numpy
         arr = np.asarray(im)
         # Суммируем значение каждого цвета
@@ -85,12 +83,12 @@ def change_pic(path, value):
         # Передаем название для каждой (цвет)
         # и его соответствующее значение
         colorList = ["red", "green", "blue"]
-        ax.bar(colorList, colorPercent)
+        ax1.bar(colorList, colorPercent)
         # Устанавливаем цвет графика
-        ax.set_facecolor('seashell')
-        fig.set_facecolor('floralwhite')
-        fig.set_figwidth(6)  #  ширина фигуры
-        fig.set_figheight(4)  #  высота фигуры
+        ax1.set_facecolor('seashell')
+        fig1.set_facecolor('floralwhite')
+        fig1.set_figwidth(6)  #  ширина фигуры
+        fig1.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
         plt.savefig("./static/images/myFig1.png")
 #         plt.close()
@@ -118,15 +116,15 @@ def main():
     form = MyForm()
     imagePath = None
     graphPath1 = None
-#     graphPath1 = None
+    graphPath1 = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath1 = os.path.join('./static/images', f'myFig1.png')
-#         graphPath2 = os.path.join('./static/images', f'myFig2.png')
+        graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
-        change_pic(imagePath, form.user.data)
+        page(imagePath, form.user.data)
     return render_template('main.html', form=form, image=imagePath, graph1=graphPath1)#, graph2=graphPath2)
 
 # Запускаем наше приложение
