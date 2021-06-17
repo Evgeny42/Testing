@@ -95,14 +95,14 @@ def change_pic(path, value):
         plt.savefig("./static/images/myFig1.png")
 #         plt.close()
 		
-        avrgColor = [0,0,0]
-        # Заполняем среднимим значениями
-        for i in range (3):
-           avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
-        fig2, ax2 = plt.subplots()
-        ax.pie(avrgColor, labels=colorList, colors=colorList)
-        ax.axis("equal")
-        plt.savefig("./static/images/myFig2.png")	
+#         avrgColor = [0,0,0]
+#         # Заполняем среднимим значениями
+#         for i in range (3):
+#            avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
+#         fig2, ax2 = plt.subplots()
+#         ax.pie(avrgColor, labels=colorList, colors=colorList)
+#         ax.axis("equal")
+#         plt.savefig("./static/images/myFig2.png")	
 #         plt.close()
         # Проходясь по картинке изменяем цвета пикселей 
         # в зависимости от выбранного порядка цветовых карт
@@ -118,16 +118,16 @@ def main():
     form = MyForm()
     imagePath = None
     graphPath1 = None
-    graphPath1 = None
+#     graphPath1 = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath1 = os.path.join('./static/images', f'myFig1.png')
-        graphPath2 = os.path.join('./static/images', f'myFig2.png')
+#         graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         change_pic(imagePath, form.user.data)
-    return render_template('main.html', form=form, image=imagePath, graph1=graphPath1, graph2=graphPath2)
+    return render_template('main.html', form=form, image=imagePath, graph1=graphPath1)#, graph2=graphPath2)
 
 # Запускаем наше приложение
 if __name__ == "__main__":
