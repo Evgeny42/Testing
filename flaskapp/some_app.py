@@ -61,6 +61,8 @@ def page(path, value):
         value = value.replace("b", "2")
         # сохраняем картинку в виде массива numpy
         arr = np.asarray(im)
+	# Сохраняем размер 
+	x,y = im.size
         # Суммируем значение каждого цвета
         eachColorSum = [0,0,0]
         for i in range(3):
