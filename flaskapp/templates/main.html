@@ -5,12 +5,12 @@
 {{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="/") }}
 
 {% if image %}
- <h3>Ваше изображение: </h3>
+ <h3>Отредактированное изображение: </h3>
  <p>{{image}}
  <p><img src="{{image}}" class="img-rounded" alt="My Image" width = 224 height=224 />
- <h3>График распределения цветов: </h3>
+ <h3>График распределения цветов для измененного изображения: </h3>
  <p><img src="{{graph1}}" class="img-rounded" alt="My FGraph" width = 280 height=224 />
- <h3>График среднего цвета: </h3>
+ <h3>График среднего цвета для исходного изображения: </h3>
  <p><img src="{{graph2}}" class="img-rounded" alt="My SGraph" width = 280 height=224 />
 {% endif %}
 {% endblock %}
