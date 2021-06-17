@@ -91,7 +91,7 @@ def page(path, value):
         fig.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
         plt.savefig("./static/images/myFig.png")
-#         plt.close()
+        plt.close()
 		
 #         avrgColor = [0,0,0]
 #         # Заполняем среднимим значениями
