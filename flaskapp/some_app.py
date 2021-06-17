@@ -92,11 +92,11 @@ def problem(path, value):
         plt.close()
         
 	
-	# Средний цвет
-        avrgColor = [0,0,0]
-        # Заполняем среднимим значениями
-        for i in range (3):
-            avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
+# 	# Средний цвет
+#         avrgColor = [0,0,0]
+#         # Заполняем среднимим значениями
+#         for i in range (3):
+#             avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
 #         fig2, ax2 = plt.subplots()
 #         ax2.bar(colorList, avrgColor)
 	
@@ -123,7 +123,7 @@ def main():
     form = MyForm()
     imagePath = None
     graphPath1 = None
-    graphPath2 = None
+#     graphPath2 = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
