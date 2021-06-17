@@ -78,17 +78,17 @@ def page(path, value):
             # Прописываем условие, чтобы избежать ошибки деления на 0
             if colorSum != 0:
                 colorPercent[i] = eachColorSum[i] / colorSum * 100
-        fig1, ax1 = plt.subplots()
+        fig, ax = plt.subplots()
         # Используем гистограмму
         # Передаем название для каждой (цвет)
         # и его соответствующее значение
         colorList = ["red", "green", "blue"]
-        ax1.bar(colorList, colorPercent)
+        ax.bar(colorList, colorPercent)
         # Устанавливаем цвет графика
-        ax1.set_facecolor('seashell')
-        fig1.set_facecolor('floralwhite')
-        fig1.set_figwidth(6)  #  ширина фигуры
-        fig1.set_figheight(4)  #  высота фигуры
+        ax.set_facecolor('seashell')
+        fig.set_facecolor('floralwhite')
+        fig.set_figwidth(6)  #  ширина фигуры
+        fig.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
         plt.savefig("./static/images/myFig1.png")
 #         plt.close()
@@ -116,12 +116,12 @@ def main():
     form = MyForm()
     imagePath = None
     graphPath1 = None
-    graphPath1 = None
+#     graphPath2 = None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath1 = os.path.join('./static/images', f'myFig1.png')
-        graphPath2 = os.path.join('./static/images', f'myFig2.png')
+#         graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         page(imagePath, form.user.data)
