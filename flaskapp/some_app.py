@@ -89,7 +89,7 @@ def problem(path, value):
         fig1.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
         plt.savefig("./static/images/myFig1.png")
-        plt.close()
+#         plt.close()
         
 	
 	# Средний цвет
