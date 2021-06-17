@@ -27,10 +27,11 @@ app = Flask(__name__)
 # в котором мы инициализируем поле для загрузки файла,
 # поле капчи, текстовое поле и кнопку подтверждения
 class MyForm(FlaskForm):
-    upload = FileField('Load image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
+    upload = FileField('Загрузите изображение', validators = 
+                       [FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только картинки!')])
     recaptcha = RecaptchaField()
-    user = TextField("\tInput")
-    submit = SubmitField('OK')    
+    user = TextField("Введите порядок цветов (rgb, brg, grb,...)")
+    submit = SubmitField('Применить')    
     
     
 SECRET_KEY = 'secret'
@@ -85,8 +86,8 @@ def change_pic(path, value):
         # Устанавливаем цвет графика
         ax.set_facecolor('seashell')
         fig.set_facecolor('floralwhite')
-        fig.set_figwidth(6)    #  ширина фигуры
-        fig.set_figheight(4)    #  высота фигуры
+        fig.set_figwidth(6)  #  ширина фигуры
+        fig.set_figheight(4)  #  высота фигуры
         plt.savefig("./static/images/myFig.png")
         plt.close()
         
