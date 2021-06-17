@@ -84,14 +84,14 @@ def page(path, value):
         # и его соответствующее значение
         colorList = ["red", "green", "blue"]
         ax.bar(colorList, colorPercent)
-        # Устанавливаем цвет графика
-        ax.set_facecolor('seashell')
-        fig.set_facecolor('floralwhite')
-        fig.set_figwidth(6)  #  ширина фигуры
-        fig.set_figheight(4)  #  высота фигуры
+#         # Устанавливаем цвет графика
+#         ax.set_facecolor('seashell')
+#         fig.set_facecolor('floralwhite')
+#         fig.set_figwidth(6)  #  ширина фигуры
+#         fig.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
         plt.savefig("./static/images/myFig.png")
-        plt.close()
+#         plt.close()
 		
 #         avrgColor = [0,0,0]
 #         # Заполняем среднимим значениями
