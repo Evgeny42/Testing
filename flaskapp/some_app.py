@@ -87,7 +87,8 @@ def change_pic(path, value):
         fig.set_facecolor('floralwhite')
         fig.set_figwidth(6)    #  ширина фигуры
         fig.set_figheight(4)    #  высота фигуры
-        plt.show() # here
+        plt.savefig("./static/images/myFig.png")
+        plt.close()
         
         # Проходясь по картинке изменяем цвета пикселей 
         # в зависимости от выбранного порядка цветовых карт
