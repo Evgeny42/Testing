@@ -52,6 +52,8 @@ def change_pic(path, value):
             value = value.replace(i, "")
     # Приводим символы к нижнему регистру
     value = value.lower()
+    # Если в веденной строке пользователя встречаются символы
+    # r, g, b, то картинка изменится
     if ("r" in value) and ("g" in value) and ("b" in value):
         # Заменяем символы r,g,b на соответствующие индексы
         value = value.replace("r", "0")
@@ -62,24 +64,28 @@ def change_pic(path, value):
         # сохраняем картинку в виде массива numpy
         arr = np.asarray(im)
         # Суммируем значение каждого цвета
-        sumRed = np.sum(arr[:,:,0])
-        sumGreen = np.sum(arr[:,:,1])
-        sumBlue = np.sum(arr[:,:,2])
-        colorList = ["red", "green", "blue"]
-        
+        eachColorSum = [0,0,0]
+        for i in range(3):
+        	if value[i] == "0":
+        		eachColorSum[0] = np.sum(arr[:,:,i])
+        	elif value[i] == "1":
+        		eachColorSum[1] = np.sum(arr[:,:,i])
+        	elif value[i] == "2":
+        		eachColorSum[2] = np.sum(arr[:,:,i])
         # получаем значение каждого цвета в процентах
-        allColor = sumRed + sumGreen + sumBlue
-        percOfRed = sumRed / allColor * 100
-        percOfGreen = sumGreen / allColor * 100
-        percOfBlue = sumBlue / allColor * 100
+        colorSum = eachColorSum[0] + eachColorSum[1] + eachColorSum[2]
         # инициализируем список со значениями в процентах для каждого цвета
-        valueList = [int(percOfRed), int(percOfGreen), int(percOfBlue)]
+        colorPercent = [0,0,0]
+        for i in range (3):
+        	# Прописываем условие, чтобы избежать ошибки деления на 0
+        	if colorSum != 0:
+	        	colorPercent[i] = eachColorSum[i] / colorSum * 100
         fig, ax = plt.subplots()
         # Используем гистограмму
         # Передаем название для каждой (цвет)
         # и его соответствующее значение
-        ax.bar(colorList, valueList)
-
+        colorList = ["red", "green", "blue"]
+        ax.bar(colorList, colorPercent)
         # Устанавливаем цвет графика
         ax.set_facecolor('seashell')
         fig.set_facecolor('floralwhite')
