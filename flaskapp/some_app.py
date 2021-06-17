@@ -79,7 +79,7 @@ def change_pic(path, value):
         for i in range (3):
             # Прописываем условие, чтобы избежать ошибки деления на 0
             if colorSum != 0:
-	        colorPercent[i] = eachColorSum[i] / colorSum * 100
+                colorPercent[i] = eachColorSum[i] / colorSum * 100
         fig, ax = plt.subplots()
         # Используем гистограмму
         # Передаем название для каждой (цвет)
@@ -95,15 +95,15 @@ def change_pic(path, value):
         plt.savefig("./static/images/myFig1.png")
         plt.close()
 		
-	avrgColor = [0,0,0]
-	# Заполняем среднимим значениями
-	for i in range (3):
-	    avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
-	fig, ax = plt.subplots()
-	ax.pie(avrgColor, labels=colorList, colors=colorList)
-	ax.axis("equal")
-	plt.savefig("./static/images/myFig2.png")	
-	plt.close()
+        avrgColor = [0,0,0]
+        # Заполняем среднимим значениями
+        for i in range (3):
+           avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
+        fig, ax = plt.subplots()
+        ax.pie(avrgColor, labels=colorList, colors=colorList)
+        ax.axis("equal")
+        plt.savefig("./static/images/myFig2.png")	
+        plt.close()
         # Проходясь по картинке изменяем цвета пикселей 
         # в зависимости от выбранного порядка цветовых карт
         for i in range(0,y):
@@ -122,7 +122,7 @@ def main():
         photo = form.upload.data.filename.split('.')[-1]
         imagePath = os.path.join('./static/images', f'photo.{photo}')
         graphPath1 = os.path.join('./static/images', f'myFig1.png')
-		graphPath2 = os.path.join('./static/images', f'myFig2.png')
+	graphPath2 = os.path.join('./static/images', f'myFig2.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
         change_pic(imagePath, form.user.data)
