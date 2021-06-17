@@ -76,17 +76,17 @@ def problem(path, value):
         	# Прописываем условие, чтобы избежать ошибки деления на 0
         	if colorSum != 0:
 	        	colorPercent[i] = eachColorSum[i] / colorSum * 100
-        fig, ax = plt.subplots()
+        fig1, ax1 = plt.subplots()
         # Используем гистограмму
         # Передаем название для каждой (цвет)
         # и его соответствующее значение
         colorList = ["red", "green", "blue"]
-        ax.bar(colorList, colorPercent)
+        ax1.bar(colorList, colorPercent)
         # Устанавливаем цвет графика
-        ax.set_facecolor('seashell')
-        fig.set_facecolor('floralwhite')
-        fig.set_figwidth(6)  #  ширина фигуры
-        fig.set_figheight(4)  #  высота фигуры
+        ax1.set_facecolor('seashell')
+        fig1.set_facecolor('floralwhite')
+        fig1.set_figwidth(6)  #  ширина фигуры
+        fig1.set_figheight(4)  #  высота фигуры
         # Сохраняем фигуру
         plt.savefig("./static/images/myFig1.png")
         plt.close()
