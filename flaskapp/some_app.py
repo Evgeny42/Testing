@@ -66,19 +66,19 @@ def change_pic(path, value):
         # Суммируем значение каждого цвета
         eachColorSum = [0,0,0]
         for i in range(3):
-        	if value[i] == "0":
-        		eachColorSum[0] = np.sum(arr[:,:,i])
-        	elif value[i] == "1":
-        		eachColorSum[1] = np.sum(arr[:,:,i])
-        	elif value[i] == "2":
-        		eachColorSum[2] = np.sum(arr[:,:,i])
+            if value[i] == "0":
+                eachColorSum[0] = np.sum(arr[:,:,i])
+            elif value[i] == "1":
+                eachColorSum[1] = np.sum(arr[:,:,i])
+            elif value[i] == "2":
+                eachColorSum[2] = np.sum(arr[:,:,i])
         # получаем значение каждого цвета в процентах
         colorSum = eachColorSum[0] + eachColorSum[1] + eachColorSum[2]
         # инициализируем список со значениями в процентах для каждого цвета
         colorPercent = [0,0,0]
         for i in range (3):
-        	# Прописываем условие, чтобы избежать ошибки деления на 0
-        	if colorSum != 0:
+            # Прописываем условие, чтобы избежать ошибки деления на 0
+            if colorSum != 0:
 	        	colorPercent[i] = eachColorSum[i] / colorSum * 100
         fig, ax = plt.subplots()
         # Используем гистограмму
@@ -99,7 +99,6 @@ def change_pic(path, value):
 		# Заполняем среднимим значениями
 		for i in range (3):
 			avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
-
 		fig, ax = plt.subplots()
 		ax.pie(avrgColor, labels=colorList, colors=colorList)
 		ax.axis("equal")
