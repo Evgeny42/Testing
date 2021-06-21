@@ -115,7 +115,7 @@ def problem(path, color1, color2, color3):
         for j in range(0,x):
             im.putpixel((j,i),(arr[i][j][int(value[0])],arr[i][j][int(value[1])],arr[i][j][int(value[2])]))
         # Сохраняем изображение
-        im.save(path)
+    im.save(path)
     
 @app.route("/", methods=['GET', 'POST'])
 def main():
