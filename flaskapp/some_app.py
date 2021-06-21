@@ -26,9 +26,11 @@ app = Flask(__name__)
 # поле капчи, текстовое поле и кнопку подтверждения
 class MyForm(FlaskForm):
     upload = FileField('Загрузите изображение', validators = 
-                       [FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только картинки!')])
+      [FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только картинки!')])
     recaptcha = RecaptchaField()
-    user = StringField("Введите порядок цветов (rgb, brg, grb,...)")
+    color1 = StringField("Введите порядок цветов (rgb, brg, grb,...)")
+    color2 = StringField()
+    color3 = StringField()
     submit = SubmitField('Применить')    
     
     
@@ -41,82 +43,79 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = '6LenXSsbAAAAALFvL7os3RcyzKnYADCcTW37GBPH'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 bootstrap = Bootstrap(app)
 
-def problem(path, value):
+def problem(path, color1, color2, color3):
     im = Image.open(path)
-    # Из введенной строки пользователем
-    # удаляем все символы кроме букв
-    for i in value:
-        if (i.isalpha() is False):
-            value = value.replace(i, "")
-    # Приводим символы к нижнему регистру
-    value = value.lower()
-    # Если в веденной строке пользователя встречаются символы
-    # r, g, b, то картинка изменится
-    if ("r" in value) and ("g" in value) and ("b" in value):
+    
         # Заменяем символы r,g,b на соответствующие индексы
-        value = value.replace("r", "0")
-        value = value.replace("g", "1")
-        value = value.replace("b", "2")
-        # Сохраняем размерность картинки
-        x,y = im.size
-        # сохраняем картинку в виде массива numpy
-        arr = np.asarray(im)
-        eachColorSum = [0,0,0]
-        for i in range(3):
-        	if value[i] == "0":
-        		eachColorSum[0] = np.sum(arr[:,:,i])
-        	elif value[i] == "1":
-        		eachColorSum[1] = np.sum(arr[:,:,i])
-        	elif value[i] == "2":
-        		eachColorSum[2] = np.sum(arr[:,:,i])
+    value = [color1, color2, color3]
+    for i in range(3):
+        value[i].lower()
+        if "r" in value[i]:
+            value[i].replace("r", "0")
+        elif "g" in value[i]:
+            value[i].replace("g", "1")
+        elif "b" in value[i]:
+            value[i].replace("b", "1")
+    # Сохраняем размерность картинки
+    x,y = im.size
+    # сохраняем картинку в виде массива numpy
+    arr = np.asarray(im)
+    eachColorSum = [0,0,0]
+    for i in range(3):
+            if value[i] == "0":
+                    eachColorSum[0] = np.sum(arr[:,:,i])
+            elif value[i] == "1":
+                    eachColorSum[1] = np.sum(arr[:,:,i])
+            elif value[i] == "2":
+                    eachColorSum[2] = np.sum(arr[:,:,i])
 
-        colorSum = eachColorSum[0] + eachColorSum[1] + eachColorSum[2]
-        colorPercent = [0,0,0]
-        for i in range (3):
-        	# Прописываем условие, чтобы избежать ошибки деления на 0
-        	if colorSum != 0:
-	        	colorPercent[i] = eachColorSum[i] / colorSum * 100
-        fig1, ax1 = plt.subplots()
-        # Используем гистограмму
-        # Передаем название для каждой (цвет)
-        # и его соответствующее значение
-        colorList = ["red", "green", "blue"]
-        ax1.bar(colorList, colorPercent)
-        # Устанавливаем цвет графика
-        ax1.set_facecolor('seashell')
-        fig1.set_facecolor('floralwhite')
-        fig1.set_figwidth(6)  #  ширина фигуры
-        fig1.set_figheight(4)  #  высота фигуры
-        # Сохраняем фигуру
-        plt.savefig("./static/images/myFig1.png")
-        plt.close()
-        
-	
-	# Средний цвет
-        avrgColor = [0,0,0]
-        # Заполняем среднимим значениями
-        for i in range (3):
-            avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
-        fig2, ax2 = plt.subplots()
-        ax2.bar(colorList, avrgColor)
+    colorSum = eachColorSum[0] + eachColorSum[1] + eachColorSum[2]
+    colorPercent = [0,0,0]
+    for i in range (3):
+        # Прописываем условие, чтобы избежать ошибки деления на 0
+            if colorSum != 0:
+                    colorPercent[i] = eachColorSum[i] / colorSum * 100
+    fig1, ax1 = plt.subplots()
+    # Используем гистограмму
+    # Передаем название для каждой (цвет)
+    # и его соответствующее значение
+    colorList = ["red", "green", "blue"]
+    ax1.bar(colorList, colorPercent)
+    # Устанавливаем цвет графика
+    ax1.set_facecolor('seashell')
+    fig1.set_facecolor('floralwhite')
+    fig1.set_figwidth(6)  #  ширина фигуры
+    fig1.set_figheight(4)  #  высота фигуры
+# Сохраняем фигуру
+    plt.savefig("./static/images/myFig1.png")
+    plt.close()
 
-        ax2.set_facecolor('floralwhite')
-        fig2.set_facecolor('seashell')
-        fig2.set_figwidth(6)  #  ширина фигуры
-        fig2.set_figheight(4)  #  высота фигуры
-	
-        plt.savefig("./static/images/avrg.png") 
-        plt.close()
-	
-	
-	
-        # Проходясь по картинке изменяем цвета пикселей 
-        # в зависимости от выбранного порядка цветовых карт
-        for i in range(0,y):
-            for j in range(0,x):
-                im.putpixel((j,i),(arr[i][j][int(value[0])],arr[i][j][int(value[1])],arr[i][j][int(value[2])]))
-    # Сохраняем изображение
-    im.save(path)
+
+    # Средний цвет
+    avrgColor = [0,0,0]
+    # Заполняем среднимим значениями
+    for i in range (3):
+        avrgColor[i] = round(np.sum(arr[:,:,i].mean()))
+    fig2, ax2 = plt.subplots()
+    ax2.bar(colorList, avrgColor)
+
+    ax2.set_facecolor('floralwhite')
+    fig2.set_facecolor('seashell')
+    fig2.set_figwidth(6)  #  ширина фигуры
+    fig2.set_figheight(4)  #  высота фигуры
+
+    plt.savefig("./static/images/avrg.png") 
+    plt.close()
+
+
+
+# Проходясь по картинке изменяем цвета пикселей 
+# в зависимости от выбранного порядка цветовых карт
+    for i in range(0,y):
+        for j in range(0,x):
+            im.putpixel((j,i),(arr[i][j][int(value[0])],arr[i][j][int(value[1])],arr[i][j][int(value[2])]))
+        # Сохраняем изображение
+        im.save(path)
     
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -131,7 +130,7 @@ def main():
         graphPath2 = os.path.join('./static/images', f'avrg.png')
         # Сохраняем наше загруженное изображение
         form.upload.data.save(imagePath)
-        problem(imagePath, form.user.data)
+        problem(imagePath, form.color1.data, form.color2.data, form.color3.data)
     return render_template('main.html', form=form, image=imagePath, graph1=graphPath1, graph2=graphPath2)
 # Запускаем наше приложение
 if __name__ == "__main__":
