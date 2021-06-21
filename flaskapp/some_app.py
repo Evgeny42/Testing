@@ -28,7 +28,7 @@ class MyForm(FlaskForm):
     upload = FileField('Загрузите изображение', validators = 
                        [FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только картинки!')])
     recaptcha = RecaptchaField()
-    user = TextField("Введите порядок цветов (rgb, brg, grb,...)")
+    user = StringField("Введите порядок цветов (rgb, brg, grb,...)")
     submit = SubmitField('Применить')    
     
     
