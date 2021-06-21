@@ -48,26 +48,22 @@ def problem(path, color1, color2, color3):
     
         # Заменяем символы r,g,b на соответствующие индексы
     value = [color1, color2, color3]
-    for i in range(3):
-        value[i].lower()
-        if "r" in value[i]:
-            value[i].replace("r", "0")
-        elif "g" in value[i]:
-            value[i].replace("g", "1")
-        elif "b" in value[i]:
-            value[i].replace("b", "1")
     # Сохраняем размерность картинки
     x,y = im.size
     # сохраняем картинку в виде массива numpy
     arr = np.asarray(im)
     eachColorSum = [0,0,0]
     for i in range(3):
-            if value[i] == "0":
-                    eachColorSum[0] = np.sum(arr[:,:,i])
-            elif value[i] == "1":
-                    eachColorSum[1] = np.sum(arr[:,:,i])
-            elif value[i] == "2":
-                    eachColorSum[2] = np.sum(arr[:,:,i])
+        value[i].lower()
+        if "r" in value[i]:
+            value[i] = 0
+            eachColorSum[0] = np.sum(arr[:,:,i])
+        elif "g" in value[i]:
+            value[i] = 1
+            eachColorSum[1] = np.sum(arr[:,:,i])
+        elif "b" in value[i]:
+            value[i] = 2
+            eachColorSum[2] = np.sum(arr[:,:,i])
 
     colorSum = eachColorSum[0] + eachColorSum[1] + eachColorSum[2]
     colorPercent = [0,0,0]
