@@ -17,17 +17,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
-#added1
-class MyModelView(BaseModelView):
-    form_widget_args = {
-        'description': {
-            'rows': 10,
-            'class': 'input-xlarge'
-        }
-    }
-#
-
 # инициализируем папку с изображением 
 IMAGE_FOLDER = os.path.join('static', 'images')
 app = Flask(__name__)
